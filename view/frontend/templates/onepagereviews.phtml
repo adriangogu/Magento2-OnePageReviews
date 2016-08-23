@@ -1,0 +1,70 @@
+<?php
+    
+    // @codingStandardsIgnoreFile
+    
+?>
+<?php
+    $_items = $block->getCollection();
+    $format = $block->getDateFormat() ?: \IntlDateFormatter::LONG;
+?>
+<?php if (count($_items)):?>
+<div class="block review-list" id="customer-reviews">
+
+    <div class="block-content">
+       
+        <ol class="items review-items">
+        <?php foreach ($_items as $_review): ?>
+            <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                                
+                    <div class="review-title" itemprop="name"><?php echo $block->escapeHtml($_review->getTitle()) ?></div>
+                                                           
+                    <?php if ($_review->getSum()): ?>
+                    <div class="review-ratings">
+                  
+                            <div class="rating-summary" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                
+                                <div class="rating-result" title="<?php /* @escapeNotVerified */ echo($_review->getSum() / $_review->getCount()) ?>%">
+                                    <meta itemprop="worstRating" content = "1"/>
+                                    <meta itemprop="bestRating" content = "100"/>
+                                    <span style="width:<?php /* @escapeNotVerified */ echo($_review->getSum() / $_review->getCount()) ?>%;">
+                                        <span itemprop="ratingValue"><?php /* @escapeNotVerified */ echo($_review->getSum() / $_review->getCount()) ?>%</span>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+                    <?php endif; ?>
+                        
+                    
+                 
+                    <div class="review-details" style="margin-bottom: 10px;" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product">
+                        <p class="review-product">
+                            <a itemprop="url" href="<?php echo $_review->getProductUrl();?>"><span itemprop="name"><?php echo  $_review->getName();?></span></a>
+                        </p>
+                    </div>
+                    <div class="review-content" itemprop="description">                   
+                        <?php echo nl2br($block->escapeHtml($_review->getDetail())) ?>
+                    </div>
+                    
+                    <div class="review-details">
+                        <p class="review-author">
+                            <span class="review-details-label"><?php /* @escapeNotVerified */ echo __('Review by')?></span>
+                            <strong class="review-details-value" itemprop="author"><?php echo $block->escapeHtml($_review->getNickname()); ?></strong>
+                        </p>
+                        <p class="review-date">
+                            <span class="review-details-label"><?php /* @escapeNotVerified */ echo __('Posted on') ?></span>
+                            <time class="review-details-value" itemprop="datePublished" datetime="<?php /* @escapeNotVerified */ echo $block->formatDate($_review->getCreatedAt(), $format) ?>"><?php /* @escapeNotVerified */ echo $block->formatDate($_review->getCreatedAt(), $format) ?></time>
+                        </p>
+                    </div>
+            </li>
+        <?php endforeach; ?>
+        </ol>
+        <div class="toolbar review-toolbar">
+            <?php echo $block->getPagerHtml(); ?>
+            
+        </div>
+         <div class="toolbar-bottom">
+        
+      </div>
+    </div>
+</div>
+<?php endif;?>
