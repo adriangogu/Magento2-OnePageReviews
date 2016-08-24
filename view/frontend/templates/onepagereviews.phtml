@@ -8,7 +8,7 @@
     $format = $block->getDateFormat() ?: \IntlDateFormatter::LONG;
 ?>
 <?php if (count($_items)):?>
-<div class="block review-list" id="customer-reviews">
+<div class="block review-list">
 
     <div class="block-content">
        
@@ -62,9 +62,7 @@
             <?php echo $block->getPagerHtml(); ?>
             
         </div>
-         <div class="toolbar-bottom">
-        
-      </div>
+     
     </div>
 </div>
 <?php endif;?>

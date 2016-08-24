@@ -1,6 +1,6 @@
 {
     "name": "ileen/onepagereviews",
-    "description": "N/A",
+    "description": "This Magento 2 module allows listing all reviews on one page.",
     "require": {
         "php": "~5.6.0|7.0.2|~7.0.6",
         "magento/framework": "100.1.*"

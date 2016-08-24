@@ -52,13 +52,13 @@ class OnePageReviews extends \Magento\Framework\View\Element\Template
         )->setTemplate('Ileen_OnePageReviews::html/pager.phtml');
         
         
-        $pager->setShowAmounts(true)->setCollection($this->getCollection());
+        $pager->setShowAmounts(false)->setCollection($this->getCollection());
         
         $this->setChild('pager', $pager);
         
         $pagetitle = $this->helper->getTitle();
         
-        if(!empty( $pagetitle ))
+        if($pagetitle && !empty( $pagetitle ))
             $this->pageConfig->getTitle()->set($pagetitle);
         else
              $this->pageConfig->getTitle()->set(__('Reviews'));
