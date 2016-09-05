@@ -43,7 +43,7 @@ class Router implements \Magento\Framework\App\RouterInterface
       
        
         $request->setModuleName('onepagereviews')->setControllerName('page')->setActionName('view');
-
+        $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $onepagereviews_url);
         return $this->actionFactory->create('Magento\Framework\App\Action\Forward');
     
     
